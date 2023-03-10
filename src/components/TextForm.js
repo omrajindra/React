@@ -17,6 +17,14 @@ export default function TextForm(props) {
     setText(newText);
   };
 
+  const handleCopyText = () => {
+    console.log("I am copy");
+    var text = document.getElementById("myBox");
+    text.select();
+    text.setSelectionRange(0, 9999);
+    navigator.clipboard.whiteText(text.value);
+  };
+
   const handleCapitalizedClick = () => {
     for (let i = 0; i < text.length; i++) {
       let newText = text[i].charAt(0).toUpperCase() + text[i].slice(1);
@@ -56,6 +64,10 @@ export default function TextForm(props) {
           onClick={handleCapitalizedClick}
         >
           Capitalized First Word
+        </button>
+
+        <button className="btn btn-primary mx-2" onClick={handleCopyText}>
+          Copy Text
         </button>
       </div>
       <div className="container my-3">
