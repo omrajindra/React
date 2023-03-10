@@ -21,7 +21,6 @@ export default function TextForm(props) {
     console.log("I am copy");
     var text = document.getElementById("myBox");
     text.select();
-    text.setSelectionRange(0, 9999);
     navigator.clipboard.whiteText(text.value);
   };
 
@@ -39,10 +38,17 @@ export default function TextForm(props) {
   const [text, setText] = useState("");
   return (
     <>
-      <div className="container">
+      <div
+        className="container"
+        style={{ color: props.mode === "dark" ? "white" : "#042743" }}
+      >
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <textarea
+            style={{
+              background: props.mode === "dark" ? "grey" : "white",
+              color: props.mode === "dark" ? "white" : "#042743",
+            }}
             className="form-control"
             id="myBox"
             rows="8"
@@ -70,14 +76,21 @@ export default function TextForm(props) {
           Copy Text
         </button>
       </div>
-      <div className="container my-3">
+      <div
+        className="container my-3"
+        style={{ color: props.mode === "dark" ? "white" : "#042743" }}
+      >
         <h1>Your Text Summary</h1>
         <p>
           {text.split(" ").length} words and {text.length} characters
         </p>
         <p>{0.008 * text.split(" ").length} Minutes read</p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>
+          {text.length > 0
+            ? text
+            : "Enter SOmething in the textbox above to preview it here"}
+        </p>
       </div>
     </>
   );
